@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |-
+    global:
+      scrape_interval:     60s
+      evaluation_interval: 60s
+    alerting:
+      alertmanagers:
+      - scheme: http
+        static_configs:
+        - targets:
+          - "alertmanager:9093"
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+        - targets: ['localhost:9090']
+      
+      - job_name: Confluent Cloud
+        scrape_interval: 1m
+        scrape_timeout: 1m
+        honor_timestamps: true
+        static_configs:
+          - targets:
+            - api.telemetry.confluent.cloud
+        scheme: https
+        basic_auth:
+          username: 'IUVQW5XCHTL6KGF7'
+          password: 'tzFb3XBKxC7xNGCTm0jQ0dsIfCAZyj8e4DGGolwWevB2H/OHd2J0R//rZX8NAlwL'
+        metrics_path: /v2/metrics/cloud/export
+        params:
+          "resource.kafka.id":
+            - 'lkc-qrj3dp'
+            - 'lkc-ym37xj'
+          "resource.ksql.id":
+            - 'lksqlc-095g85'
+            - 'lksqlc-3r0ygo'
+          "resource.schema_registry.id":
+            - 'lsrc-o3jn7j'
+            - 'lsrc-9731q5'

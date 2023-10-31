@@ -34,13 +34,12 @@ scrape_configs:
           - api.telemetry.confluent.cloud
     scheme: https
     basic_auth:
-      username: ${CCLOUD_EXPORTER_API_KEY}
-      password: ${CCLOUD_EXPORTER_API_SECRET}
+      username: ZM46S46C5LQPNYSG
+      password: d10D/yWkwz0BiHz8kYtpy+lQEMvUf2lwNWKTeRaRq4Wjne3f8MmivhspSOHBudD/
     metrics_path: /v2/metrics/cloud/export
     params:
       "resource.kafka.id":
-        - ${CCLOUD_CLUSTER}
-      "resource.connector.id":
+        - lkc-z3ygzz
 
   - job_name: 'kafka-connect'
     scrape_interval: 60s
